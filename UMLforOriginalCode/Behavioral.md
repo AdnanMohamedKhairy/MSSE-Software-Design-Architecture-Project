@@ -1,6 +1,6 @@
 ```mermaid
 graph TD
-    S[Start: Click "Remove Car"] --> T{Execute leave()};
+    S[Start: Remove Car] --> T{Execute leave};
     
     T --> U{Is Vehicle EV?};
     
@@ -16,8 +16,8 @@ graph TD
     W --> A{Was Successful?};
     Z --> A;
     
-    X --> B[Output "Failure Message"];
-    A -->|Success| C[Output "Success Message"];
+    X --> B[Output Failure];
+    A -->|Success| C[Output Slot is free];
     A -->|Failure| B;
     
     C --> E(End);
