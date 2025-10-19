@@ -1,16 +1,13 @@
-## 🧩 UML Class Diagram — Exact-Image-Style (two ParkingLot boxes, same visible name)
-
-```mermaid
-%% Image-style UML: two ParkingLot boxes visually separated but both labeled "ParkingLot"
 classDiagram
-    %% try to encourage left-to-right grouping
-    %% (GitHub's Mermaid does not guarantee perfect placement but this matches the image structure)
-    %% ---------- LEFT: Vehicle hierarchy ----------
+    direction LR
+
+    %% -------------------- Vehicle Hierarchy --------------------
     class Vehicle {
         - regnum: str
         - make: str
         - model: str
         - color: str
+        + __init__(regnum, make, model, color)
         + getMake()
         + getModel()
         + getColor()
@@ -18,16 +15,23 @@ classDiagram
     }
 
     class Car {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Car"
     }
+
     class Truck {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Truck"
     }
+
     class Motorcycle {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Motorcycle"
     }
+
     class Bus {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Bus"
     }
 
     Vehicle <|-- Car
@@ -35,74 +39,58 @@ classDiagram
     Vehicle <|-- Motorcycle
     Vehicle <|-- Bus
 
-    %% ---------- RIGHT: ElectricVehicle hierarchy ----------
+    %% -------------------- ElectricVehicle Hierarchy --------------------
     class ElectricVehicle {
         - regnum: str
         - make: str
         - model: str
         - color: str
-        - charge: int
+        - charge: int = 0
+        + __init__(regnum, make, model, color)
         + getMake()
         + getModel()
         + getColor()
         + getRegNum()
         + setCharge(charge: int)
-        + getCharge() : int
+        + getCharge(): int
     }
 
     class ElectricCar {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Car"
     }
+
     class ElectricBike {
-        + getType()
+        + __init__(regnum, make, model, color)
+        + getType(): "Motorcycle"
     }
 
     ElectricVehicle <|-- ElectricCar
     ElectricVehicle <|-- ElectricBike
 
-    %% ---------- CENTER: Two visual ParkingLot boxes (same visible label) ----------
-    %% We use distinct internal IDs but make the displayed name identical by quoting the visible name.
-    class "ParkingLot" as ParkingLot_Regular {
+    %% -------------------- ParkingLot (Manager) --------------------
+    class ParkingLot {
         - capacity: int
-        - level: int
-        - slotid: int
-        - numOfOccupiedSlots: int
-        - slots: list
-        + createParkingLot(capacity, evcapacity, level)
-        + park(regnum, make, model, color, ev, motor)
-        + leave(slotid, ev)
-        + edit(slotid, regnum, make, model, color, ev)
-        + status()
-        + getRegNumFromColor(color)
-        + getSlotNumFromRegNum(regnum)
-        + getSlotNumFromColor(color)
-        + getSlotNumFromMake(make)
-        + getSlotNumFromModel(model)
-    }
-
-    class "ParkingLot" as ParkingLot_EV {
         - evCapacity: int
         - level: int
+        - slotid: int
         - slotEvId: int
+        - numOfOccupiedSlots: int
         - numOfOccupiedEvSlots: int
-        - evSlots: list
+        - slots: List~Vehicle~
+        - evSlots: List~ElectricVehicle~
+        + __init__()
         + createParkingLot(capacity, evcapacity, level)
         + park(regnum, make, model, color, ev, motor)
         + leave(slotid, ev)
-        + edit(slotid, regnum, make, model, color, ev)
+        + status()
         + chargeStatus()
-        + getRegNumFromColor(color)
-        + getSlotNumFromRegNum(regnum)
-        + getSlotNumFromColor(color)
-        + getSlotNumFromMake(make)
-        + getSlotNumFromModel(model)
+        + slotNumByReg()
+        + slotNumByColor()
+        + regNumByColor()
+        // ... other methods omitted for brevity
     }
 
-    %% dashed association indicating both visual boxes represent the same logical class
-    ParkingLot_Regular <..> ParkingLot_EV : <<same logical class>>
-
-    %% ---------- Relationships (match image grouping) ----------
-    %% Left parkinglot manages regular Vehicles
-    ParkingLot_Regular --> Vehicle : manages
-    %% Right parkinglot manages ElectricVehicles
-    ParkingLot_EV --> ElectricVehicle : manages
+    %% -------------------- Relationships --------------------
+    ParkingLot "1" *-- "*" Vehicle : manages
+    ParkingLot "1" *-- "*" ElectricVehicle : manages
