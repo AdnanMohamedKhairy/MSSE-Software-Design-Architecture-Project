@@ -1,9 +1,10 @@
-
-## 🧩 UML Class Diagram — Parking Lot Management System
+## 🧩 UML Class Diagram — Parking Lot Management System (Image-Style Version)
 
 ```mermaid
 classDiagram
-    %% === Base Vehicle Classes ===
+    %% ===============================
+    %%      Vehicle Hierarchy
+    %% ===============================
     class Vehicle {
         - regnum: str
         - make: str
@@ -16,19 +17,19 @@ classDiagram
     }
 
     class Car {
-        + getType()
+        + getType() : "Car"
     }
 
     class Truck {
-        + getType()
+        + getType() : "Truck"
     }
 
     class Motorcycle {
-        + getType()
+        + getType() : "Motorcycle"
     }
 
     class Bus {
-        + getType()
+        + getType() : "Bus"
     }
 
     Vehicle <|-- Car
@@ -37,7 +38,9 @@ classDiagram
     Vehicle <|-- Bus
 
 
-    %% === Electric Vehicle Classes ===
+    %% ===============================
+    %%     Electric Vehicle Hierarchy
+    %% ===============================
     class ElectricVehicle {
         - regnum: str
         - make: str
@@ -48,31 +51,35 @@ classDiagram
         + getModel()
         + getColor()
         + getRegNum()
-        + setCharge(charge)
-        + getCharge()
+        + setCharge(charge: int)
+        + getCharge() : int
     }
 
     class ElectricCar {
-        + getType()
+        + getType() : "Car"
     }
 
     class ElectricBike {
-        + getType()
+        + getType() : "Motorcycle"
     }
 
     ElectricVehicle <|-- ElectricCar
     ElectricVehicle <|-- ElectricBike
 
 
-    %% === Parking Lot ===
+    %% ===============================
+    %%        Parking Lot Manager
+    %% ===============================
     class ParkingLot {
         - capacity: int
         - evCapacity: int
         - level: int
-        - slots: list
-        - evSlots: list
+        - slotid: int
+        - slotEvId: int
         - numOfOccupiedSlots: int
         - numOfOccupiedEvSlots: int
+        - slots: list
+        - evSlots: list
         + createParkingLot(capacity, evcapacity, level)
         + park(regnum, make, model, color, ev, motor)
         + leave(slotid, ev)
@@ -81,7 +88,8 @@ classDiagram
         + chargeStatus()
         + getRegNumFromColor(color)
         + getSlotNumFromRegNum(regnum)
+        + getSlotNumFromColor(color)
     }
 
-    ParkingLot --> Vehicle : uses
-    ParkingLot --> ElectricVehicle : uses
+    ParkingLot --> Vehicle : manages >
+    ParkingLot --> ElectricVehicle : manages >
