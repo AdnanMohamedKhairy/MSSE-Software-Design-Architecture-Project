@@ -1,19 +1,24 @@
 ```mermaid
 graph TD
-    A[Start: Click "Park"] --> B{Execute park()};
-    B --> C{Is Lot Full?};
-    C -->|Yes| D[Output "Lot full"];
-    C -->|No| E{Is Vehicle EV?};
-    E -->|Yes| F{Is EV Spot Available?};
-    F -->|Yes| G[Get EV Slot & Create EV];
-    F -->|No| H[Output "No EV parking"];
-    E -->|No| I{Is Regular Spot Available?};
-    I -->|Yes| J[Get Regular Slot & Create Vehicle];
-    I -->|No| K[Output "No regular parking"];
-    G --> L[Increment EV Counter & Output Slot #];
-    J --> M[Increment Regular Counter & Output Slot #];
-    D --> N(End);
-    H --> N;
-    K --> N;
-    L --> N;
-    M --> N;
+    S[Start: Click "Remove Car"] --> T{Execute leave()};
+    
+    T --> U{Is Vehicle EV?};
+    
+    U -->|Yes| V{Is EV Slot Occupied?};
+    U -->|No| Y{Is Regular Slot Occupied?};
+    
+    V -->|Yes| W[Free EV Slot];
+    V -->|No| X[Return False];
+    
+    Y -->|Yes| Z[Free Regular Slot];
+    Y -->|No| X;
+    
+    W --> A{Was Successful?};
+    Z --> A;
+    
+    X --> B[Output "Failure Message"];
+    A -->|Success| C[Output "Success Message"];
+    A -->|Failure| B;
+    
+    C --> E(End);
+    B --> E;
