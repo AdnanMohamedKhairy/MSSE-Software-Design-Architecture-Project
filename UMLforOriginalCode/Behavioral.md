@@ -1,4 +1,3 @@
-```mermaid
 graph TD
     A[Start: User Clicks "Park Car"] --> B{Execute ParkingLot.park()};
 
