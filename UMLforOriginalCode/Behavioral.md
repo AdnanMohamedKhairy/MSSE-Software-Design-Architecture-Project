@@ -1,29 +1,24 @@
 ```mermaid
-activityDiagram
-    start
-    :User clicks "Park Car";
-    :Execute ParkingLot.park();
+graph TD
+    A[Start: User Clicks "Park Car"] --> B{Execute ParkingLot.park()};
 
-    if (Is Lot Full?) then (Yes)
-      :Output "Sorry, parking lot is full";
-      stop
-    else (No)
-      if (Is Vehicle Electric?) then (Yes)
-        if (Is EV Spot Available?) then (Yes)
-          :Get Empty EV Slot;
-          :Create ElectricCar/ElectricBike;
-          :Output Allocated slot number;
-        else (No)
-          :Output "Sorry, no EV parking available";
-        end
-      else (No)
-        if (Is Regular Spot Available?) then (Yes)
-          :Get Empty Regular Slot;
-          :Create Car/Motorcycle;
-          :Output Allocated slot number;
-        else (No)
-          :Output "Sorry, no regular parking available";
-        end
-      end
-    end
-    stop
+    B -->|Is Lot Full?| C{Is Lot Full?};
+    C -->|Yes| D[Output "Sorry, parking lot is full"];
+    C -->|No| E{Is Vehicle Electric?};
+
+    E -->|Yes (EV)| F{Is EV Spot Available?};
+    F -->|Yes| G[Get Empty EV Slot & Create EV];
+    F -->|No| H[Output "No EV parking available"];
+
+    E -->|No (Regular)| I{Is Regular Spot Available?};
+    I -->|Yes| J[Get Empty Regular Slot & Create Vehicle];
+    I -->|No| K[Output "No regular parking available"];
+
+    G --> L[Increment EV Counter & Output Slot #];
+    J --> M[Increment Regular Counter & Output Slot #];
+
+    D --> N(End);
+    H --> N;
+    K --> N;
+    L --> N;
+    M --> N;
