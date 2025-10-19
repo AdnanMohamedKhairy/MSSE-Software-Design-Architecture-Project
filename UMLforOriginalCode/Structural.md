@@ -1,8 +1,9 @@
-## 🧩 UML Class Diagram — Exact Image Match (ParkingLot shown twice)
+## UML — Exact Image-Style (two ParkingLot boxes)
 
 ```mermaid
 classDiagram
-    %% === Vehicle Hierarchy ===
+    %% Layout hint (GitHub Mermaid ignores strict positioning but this groups visually)
+    %% Vehicle hierarchy (left cluster)
     class Vehicle {
         - regnum: str
         - make: str
@@ -15,16 +16,16 @@ classDiagram
     }
 
     class Car {
-        + getType() : "Car"
+        + getType()
     }
     class Truck {
-        + getType() : "Truck"
+        + getType()
     }
     class Motorcycle {
-        + getType() : "Motorcycle"
+        + getType()
     }
     class Bus {
-        + getType() : "Bus"
+        + getType()
     }
 
     Vehicle <|-- Car
@@ -32,7 +33,7 @@ classDiagram
     Vehicle <|-- Motorcycle
     Vehicle <|-- Bus
 
-    %% === Electric Vehicle Hierarchy ===
+    %% ElectricVehicle hierarchy (right cluster)
     class ElectricVehicle {
         - regnum: str
         - make: str
@@ -43,21 +44,21 @@ classDiagram
         + getModel()
         + getColor()
         + getRegNum()
-        + setCharge(charge: int)
-        + getCharge() : int
+        + setCharge(charge)
+        + getCharge()
     }
 
     class ElectricCar {
-        + getType() : "Car"
+        + getType()
     }
     class ElectricBike {
-        + getType() : "Motorcycle"
+        + getType()
     }
 
     ElectricVehicle <|-- ElectricCar
     ElectricVehicle <|-- ElectricBike
 
-    %% === Parking Lot (two visual boxes to match image) ===
+    %% ParkingLot shown TWICE — left = regular slots, right = EV slots (matches image)
     class ParkingLot_Regular {
         - capacity: int
         - level: int
@@ -72,6 +73,8 @@ classDiagram
         + getRegNumFromColor(color)
         + getSlotNumFromRegNum(regnum)
         + getSlotNumFromColor(color)
+        + getSlotNumFromMake(make)
+        + getSlotNumFromModel(model)
     }
 
     class ParkingLot_EV {
@@ -88,11 +91,13 @@ classDiagram
         + getRegNumFromColor(color)
         + getSlotNumFromRegNum(regnum)
         + getSlotNumFromColor(color)
+        + getSlotNumFromMake(make)
+        + getSlotNumFromModel(model)
     }
 
-    %% show they are the same logical class (dashed association)
+    %% Visual indication they represent the same logical ParkingLot (dashed line + label)
     ParkingLot_Regular <..> ParkingLot_EV : <<same logical class>>
 
-    %% relationships to vehicle classes
+    %% Management relationships (matches image: left manages Vehicle, right manages ElectricVehicle)
     ParkingLot_Regular --> Vehicle : manages
     ParkingLot_EV --> ElectricVehicle : manages
