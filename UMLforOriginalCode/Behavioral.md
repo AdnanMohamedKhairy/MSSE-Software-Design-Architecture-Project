@@ -1,35 +1,32 @@
 ```mermaid
-%% Activity Diagram for Parking a Vehicle
+%% Activity Diagram: Parking a Vehicle
 activityDiagram
     start
-    :User clicks "Park Car";
+    :User provides vehicle details and clicks "Park Car";
     :Execute ParkingLot.park();
     
-    if (Lot is full?) then (Yes)
+    if (Is Lot Full?) then (Yes)
         :Output "Sorry, parking lot is full";
         stop
-    else (No, spot available)
-        if (Vehicle is Electric?) then (Yes, ev == 1)
-            if (EV spot available?) then (Yes)
+    else (No)
+        if (Is Vehicle Electric (EV)? - ev == 1) then (Yes)
+            if (Is EV Spot Available?) then (Yes)
                 :Get Empty EV Slot;
-                :Create ElectricCar/ElectricBike;
+                :Create ElectricCar or ElectricBike;
                 :Increment numOfOccupiedEvSlots;
                 :Output Allocated slot number;
-                end
             else (No)
-                :Output "Sorry, EV parking full";
-                end
+                :Output "Sorry, no EV parking available";
             end
-        else (No, Regular Vehicle)
-            if (Regular spot available?) then (Yes)
+        else (No - Regular Vehicle)
+            if (Is Regular Spot Available?) then (Yes)
                 :Get Empty Regular Slot;
-                :Create Car/Motorcycle;
+                :Create Car or Motorcycle;
                 :Increment numOfOccupiedSlots;
                 :Output Allocated slot number;
-                end
             else (No)
-                :Output "Sorry, Regular parking full";
-                end
+                :Output "Sorry, no regular parking available";
             end
         end
     end
+    stop
