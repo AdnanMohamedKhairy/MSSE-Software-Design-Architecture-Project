@@ -1,23 +1,19 @@
 ```mermaid
 graph TD
-    S[Start: Click "Remove Car"] --> T{Execute leave(slotid, ev)};
-
-    T --> U{Is Vehicle EV?};
-
-    U -->|Yes| V{Is EV Slot Occupied?};
-    V -->|Yes| W[Free EV Slot & Decrement Counter];
-    V -->|No| X[Return False];
-
-    U -->|No| Y{Is Regular Slot Occupied?};
-    Y -->|Yes| Z[Free Regular Slot & Decrement Counter];
-    Y -->|No| X;
-
-    W --> A{Was Removal Successful?};
-    Z --> A;
-
-    X --> B[Output "Unable to remove..."];
-    A -->|Success| C[Output "Slot is free"];
-    A -->|Failure| B;
-
-    C --> E(End);
-    B --> E;
+A[Start: Click "Park"] --> B{Execute park()};
+B --> C{Is Lot Full?};
+C -->|Yes| D[Output "Lot full"];
+C -->|No| E{Is EV Vehicle?};
+E -->|Yes| F{Is EV Spot Available?};
+F -->|Yes| G[Get EV Slot & Create EV];
+F -->|No| H[Output "No EV parking"];
+E -->|No| I{Is Regular Spot Available?};
+I -->|Yes| J[Get Regular Slot & Create Vehicle];
+I -->|No| K[Output "No regular parking"];
+G --> L[Increment Counter & Output Slot #];
+J --> M[Increment Counter & Output Slot #];
+D --> N(End);
+H --> N;
+K --> N;
+L --> N;
+M --> N;
