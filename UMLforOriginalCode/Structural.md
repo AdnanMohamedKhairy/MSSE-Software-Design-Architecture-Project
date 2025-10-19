@@ -1,3 +1,8 @@
+```mermaid
+// Paste the Mermaid code block above here
+classDiagram
+    // ... code ...
+
 classDiagram
     direction LR
 
