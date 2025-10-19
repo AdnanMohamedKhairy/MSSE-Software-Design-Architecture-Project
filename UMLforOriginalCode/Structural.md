@@ -1,7 +1,5 @@
 ```mermaid
-// Paste the Mermaid code block above here
 
-    // ... code ...
 
 classDiagram
     direction LR
