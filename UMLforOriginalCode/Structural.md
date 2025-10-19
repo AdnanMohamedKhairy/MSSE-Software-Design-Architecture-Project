@@ -1,10 +1,8 @@
-## 🧩 UML Class Diagram — Parking Lot Management System (Image-Style Version)
+## 🧩 UML Class Diagram — Parking Lot Management System (Image-Style: ParkingLot shown twice)
 
 ```mermaid
 classDiagram
-    %% ===============================
-    %%      Vehicle Hierarchy
-    %% ===============================
+    %% === Vehicle Hierarchy ===
     class Vehicle {
         - regnum: str
         - make: str
@@ -19,15 +17,12 @@ classDiagram
     class Car {
         + getType() : "Car"
     }
-
     class Truck {
         + getType() : "Truck"
     }
-
     class Motorcycle {
         + getType() : "Motorcycle"
     }
-
     class Bus {
         + getType() : "Bus"
     }
@@ -38,9 +33,7 @@ classDiagram
     Vehicle <|-- Bus
 
 
-    %% ===============================
-    %%     Electric Vehicle Hierarchy
-    %% ===============================
+    %% === Electric Vehicle Hierarchy ===
     class ElectricVehicle {
         - regnum: str
         - make: str
@@ -58,7 +51,6 @@ classDiagram
     class ElectricCar {
         + getType() : "Car"
     }
-
     class ElectricBike {
         + getType() : "Motorcycle"
     }
@@ -67,29 +59,49 @@ classDiagram
     ElectricVehicle <|-- ElectricBike
 
 
-    %% ===============================
-    %%        Parking Lot Manager
-    %% ===============================
-    class ParkingLot {
+    %% === Parking Lot (two visual boxes to match image) ===
+    class ParkingLot_Regular {
         - capacity: int
-        - evCapacity: int
         - level: int
         - slotid: int
-        - slotEvId: int
         - numOfOccupiedSlots: int
-        - numOfOccupiedEvSlots: int
         - slots: list
-        - evSlots: list
         + createParkingLot(capacity, evcapacity, level)
         + park(regnum, make, model, color, ev, motor)
         + leave(slotid, ev)
         + edit(slotid, regnum, make, model, color, ev)
         + status()
+        + getRegNumFromColor(color)
+        + getSlotNumFromRegNum(regnum)
+        + getSlotNumFromColor(color)
+    }
+
+    class ParkingLot_EV {
+        - evCapacity: int
+        - level: int
+        - slotEvId: int
+        - numOfOccupiedEvSlots: int
+        - evSlots: list
+        + createParkingLot(capacity, evcapacity, level)
+        + park(regnum, make, model, color, ev, motor)
+        + leave(slotid, ev)
+        + edit(slotid, regnum, make, model, color, ev)
         + chargeStatus()
         + getRegNumFromColor(color)
         + getSlotNumFromRegNum(regnum)
         + getSlotNumFromColor(color)
     }
 
-    ParkingLot --> Vehicle : manages >
-    ParkingLot --> ElectricVehicle : manages >
+    %% show they are conceptually the same manager (note)
+    ParkingLot_Regular <..> ParkingLot_EV : <<same logical class>>
+
+    %% relationships to vehicle classes (manages)
+    ParkingLot_Regular --> Vehicle : manages >
+    ParkingLot_EV --> ElectricVehicle : manages >
+
+    %% optional note to explain the duplication (renders as a note in Mermaid)
+    note right of ParkingLot_EV
+      ParkingLot_Regular and ParkingLot_EV are
+      visually separated to reflect regular vs EV
+      slot responsibilities (matches the image).
+    end note
