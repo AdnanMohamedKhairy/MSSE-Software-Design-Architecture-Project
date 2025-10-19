@@ -101,4 +101,8 @@ classDiagram
     %% dashed association indicating both visual boxes represent the same logical class
     ParkingLot_Regular <..> ParkingLot_EV : <<same logical class>>
 
-    %% ---------- Rela
+    %% ---------- Relationships (match image grouping) ----------
+    %% Left parkinglot manages regular Vehicles
+    ParkingLot_Regular --> Vehicle : manages
+    %% Right parkinglot manages ElectricVehicles
+    ParkingLot_EV --> ElectricVehicle : manages
