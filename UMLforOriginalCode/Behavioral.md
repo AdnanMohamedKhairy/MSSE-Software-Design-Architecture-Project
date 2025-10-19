@@ -1,5 +1,4 @@
 ```mermaid
-
 graph TD
     S[Start: Click "Remove Car"] --> T{Execute leave(slotid, ev)};
 
