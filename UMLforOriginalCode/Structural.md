@@ -1,9 +1,11 @@
-## UML — Exact Image-Style (two ParkingLot boxes)
+## 🧩 UML Class Diagram — Exact-Image-Style (two ParkingLot boxes, same visible name)
 
 ```mermaid
+%% Image-style UML: two ParkingLot boxes visually separated but both labeled "ParkingLot"
 classDiagram
-    %% Layout hint (GitHub Mermaid ignores strict positioning but this groups visually)
-    %% Vehicle hierarchy (left cluster)
+    %% try to encourage left-to-right grouping
+    %% (GitHub's Mermaid does not guarantee perfect placement but this matches the image structure)
+    %% ---------- LEFT: Vehicle hierarchy ----------
     class Vehicle {
         - regnum: str
         - make: str
@@ -33,7 +35,7 @@ classDiagram
     Vehicle <|-- Motorcycle
     Vehicle <|-- Bus
 
-    %% ElectricVehicle hierarchy (right cluster)
+    %% ---------- RIGHT: ElectricVehicle hierarchy ----------
     class ElectricVehicle {
         - regnum: str
         - make: str
@@ -44,8 +46,8 @@ classDiagram
         + getModel()
         + getColor()
         + getRegNum()
-        + setCharge(charge)
-        + getCharge()
+        + setCharge(charge: int)
+        + getCharge() : int
     }
 
     class ElectricCar {
@@ -58,8 +60,9 @@ classDiagram
     ElectricVehicle <|-- ElectricCar
     ElectricVehicle <|-- ElectricBike
 
-    %% ParkingLot shown TWICE — left = regular slots, right = EV slots (matches image)
-    class ParkingLot_Regular {
+    %% ---------- CENTER: Two visual ParkingLot boxes (same visible label) ----------
+    %% We use distinct internal IDs but make the displayed name identical by quoting the visible name.
+    class "ParkingLot" as ParkingLot_Regular {
         - capacity: int
         - level: int
         - slotid: int
@@ -77,7 +80,7 @@ classDiagram
         + getSlotNumFromModel(model)
     }
 
-    class ParkingLot_EV {
+    class "ParkingLot" as ParkingLot_EV {
         - evCapacity: int
         - level: int
         - slotEvId: int
@@ -95,9 +98,7 @@ classDiagram
         + getSlotNumFromModel(model)
     }
 
-    %% Visual indication they represent the same logical ParkingLot (dashed line + label)
+    %% dashed association indicating both visual boxes represent the same logical class
     ParkingLot_Regular <..> ParkingLot_EV : <<same logical class>>
 
-    %% Management relationships (matches image: left manages Vehicle, right manages ElectricVehicle)
-    ParkingLot_Regular --> Vehicle : manages
-    ParkingLot_EV --> ElectricVehicle : manages
+    %% ---------- Rela
