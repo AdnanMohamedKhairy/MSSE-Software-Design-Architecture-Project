@@ -1,4 +1,3 @@
-```markdown
 ```mermaid
   graph TD
     S[Start: Click "Remove"] --> T{Execute leave(slotid, ev)};
