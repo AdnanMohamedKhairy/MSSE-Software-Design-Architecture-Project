@@ -1,52 +1,52 @@
 ```mermaid
 graph TD
 
-%% Parking a Vehicle (ParkingLot.park)
-    A[Parking Start] --> B{Execute park method};
+%% Parking Flow
+    A[Start UI Gathers Input] --> B{Call ParkingLotpark};
     
-    B --> C{Is Overall Lot Full?};
-    C -->|Yes| D[OUTPUT: Lot is Full];
-    C -->|No| E{Is Vehicle Electric?};
+    B --> C{Is Overall Lot Full};
+    C -->|Yes| D[RETURN -1 Lot Full];
     
-    E -->|Yes| F{EV Spot Available?};
-    F -->|No| H[OUTPUT: No EV parking];
-    F -->|Yes| G[Get EV Slot & Create EV];
+    C -->|No| E{Determine Vehicle Type};
     
-    E -->|No| I{Regular Spot Available?};
-    I -->|Yes| J[Get Regular Slot & Create Vehicle];
-    I -->|No| K[OUTPUT: No regular parking];
-    
-    G --> L[Increment EV Counter];
-    J --> M[Increment Regular Counter];
-    
-    L --> P[OUTPUT: Allocated Slot #];
-    M --> P;
-    
-    D --> N(End Parking Process);
-    H --> N;
-    K --> N;
-    P --> N;
+    E --> F[Call VehicleFactorycreate_vehicle];
+    F --> G[Factory Returns New Vehicle Object];
 
-%% Removing a Vehicle (ParkingLot.leave)
-    S[Removal Start] --> T{Execute leave method};
+    G --> H{Is Regular Spot Available};
+    H -->|Yes| I[Assign Vehicle to Regular Slot];
+    H -->|No| J{Is EV Spot Available};
     
-    T --> U{Is Vehicle EV to Remove?};
+    J -->|Yes| K[Assign Vehicle to EV Slot];
+    J -->|No| D;
+
+    I --> L[RETURN Allocated Slot ID];
+    K --> L;
     
-    U -->|Yes| V{Is EV Slot Occupied?};
-    U -->|No| Y{Is Regular Slot Occupied?};
+    D --> N(End UI Displays Lot Full);
+    L --> P(End UI Displays Slot ID);
     
-    V -->|Yes| W[Action: Free EV Slot];
-    V -->|No| X[Result: Return False];
+    P --> N;
     
-    Y -->|Yes| Z[Action: Free Regular Slot];
+%% Removal Flow
+    S[Start UI Gathers Slot ID] --> T{Call ParkingLotleave};
+    
+    T --> U{Is Slot an EV Slot};
+    
+    U -->|Yes| V{Is Target EV Slot Occupied};
+    U -->|No| Y{Is Target Regular Slot Occupied};
+    
+    V -->|Yes| W[Action Free EV Slot Index];
+    V -->|No| X[RETURN False];
+    
+    Y -->|Yes| Z[Action Free Regular Slot Index];
     Y -->|No| X;
     
-    W --> A{Is Removal Complete?};
-    Z --> A;
+    W --> A2{Decrement Counter};
+    Z --> A2;
     
-    X --> B[OUTPUT: Removal Failed];
-    A -->|Success| C[OUTPUT: Slot is Now Free];
-    A -->|Failure| B;
+    A2 --> C2[RETURN True];
     
-    C --> E2(End Removal Process);
-    B --> E2;
+    C2 --> E2[End UI Displays Slot is Free];
+    X --> B2[End UI Displays Unable to Remove];
+    
+    B2 --> E2;
