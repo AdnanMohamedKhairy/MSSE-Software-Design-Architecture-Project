@@ -24,13 +24,6 @@ subgraph Parking Flow
     D --> N(End UI Displays Lot Full);
     L --> P(End UI Displays Slot ID);
 end
-
----
-
-## 2. Removing a Vehicle Behavioral Diagram (Block 2)
-
-This code block renders the **Removal Flow** directly underneath the first diagram.
-
 ```markdown
 ```mermaid
 graph TD
