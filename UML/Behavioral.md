@@ -1,8 +1,7 @@
 ```mermaid
 graph TD
-
-%% Parking Flow
-subgraph A_Parking_Flow
+subgraph Parking Flow
+    direction TD
     A[Start UI Gathers Input] --> B{Call ParkingLotpark};
     
     B --> C{Is Overall Lot Full};
@@ -13,35 +12,41 @@ subgraph A_Parking_Flow
     E --> F[Call VehicleFactorycreate_vehicle];
     F --> G[Factory Returns New Vehicle Object];
 
-    G --> H{Is Regular Spot Available};
-    H -->|Yes| I[Assign Vehicle to Regular Slot];
-    H -->|No| J{Is EV Spot Available};
+    G --> H{Is Regular Spot Available?};
+    H --> I[Assign Vehicle to Regular Slot];
+    H --> J{Is EV Spot Available?};
     
-    J -->|Yes| K[Assign Vehicle to EV Slot];
-    J -->|No| D;
+    J --> K[Assign Vehicle to EV Slot];
+    J --> D;
 
+    H -->|No| J;
     I --> L[RETURN Allocated Slot ID];
     K --> L;
     
     D --> N(End UI Displays Lot Full);
     L --> P(End UI Displays Slot ID);
+
+    P --> N;
 end
 
-%% Removal Flow
-subgraph B_Removal_Flow
+subgraph Removal Flow
+    direction TD
     S[Start UI Gathers Slot ID] --> T{Call ParkingLotleave};
     
-    T --> U{Is Slot an EV Slot};
+    T --> U{Is Slot an EV Slot?};
     
-    U -->|Yes| V{Is Target EV Slot Occupied};
-    U -->|No| Y{Is Target Regular Slot Occupied};
+    U -->|Yes| V{Is Target EV Slot Occupied?};
+    U -->|No| Y{Is Target Regular Slot Occupied?};
     
-    V -->|Yes| W[Action Free EV Slot Index];
-    V -->|No| X[RETURN False];
+    V --> W[Action Free EV Slot Index];
+    V --> X[RETURN False];
     
-    Y -->|Yes| Z[Action Free Regular Slot Index];
+    Y --> Z[Action Free Regular Slot Index];
+    Y --> X;
+    
+    V -->|No| X;
     Y -->|No| X;
-    
+
     W --> A2{Decrement Counter};
     Z --> A2;
     
@@ -49,4 +54,6 @@ subgraph B_Removal_Flow
     
     C2 --> E2[End UI Displays Slot is Free];
     X --> B2[End UI Displays Unable to Remove];
+    
+    B2 --> E2;
 end
