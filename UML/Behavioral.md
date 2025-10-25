@@ -24,8 +24,6 @@ subgraph Parking Flow
     D --> N(End UI Displays Lot Full);
     L --> P(End UI Displays Slot ID);
 end
-```markdown
-```mermaid
 graph TD
 subgraph Removal Flow
     S[Start UI Gathers Slot ID] --> T{Call ParkingLotleave};
