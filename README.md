@@ -8,7 +8,7 @@ The project also includes a high-level architectural proposal for scaling the sy
 
 ## Table of Contents
 
-1. Quick Links (#Quick Links)
+1. Quick Links (#quick-links)
 2.  [Initial Problem Statement](#initial-problem-statement)
 3.  [Refactoring and Improvements](#refactoring-and-improvements)
     *   [Phase 1: Code Refactoring & Anti-Pattern Removal](#phase-1-code-refactoring--anti-pattern-removal)
