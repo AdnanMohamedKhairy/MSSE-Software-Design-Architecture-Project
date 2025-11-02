@@ -8,16 +8,19 @@ The project also includes a high-level architectural proposal for scaling the sy
 
 ## Table of Contents
 
-1.  [Initial Problem Statement](#initial-problem-statement)
-2.  [Refactoring and Improvements](#refactoring-and-improvements)
+1. Quick Links
+2.  [Initial Problem Statement](#initial-problem-statement)
+3.  [Refactoring and Improvements](#refactoring-and-improvements)
     *   [Phase 1: Code Refactoring & Anti-Pattern Removal](#phase-1-code-refactoring--anti-pattern-removal)
     *   [Phase 2: Software Design Patterns & Principles](#phase-2-software-design-patterns--principles)
-3.  [Final Project Structure](#final-project-structure)
-4.  [Design Patterns Used](#design-patterns-used)
+4.  [Final Project Structure](#final-project-structure)
+5.  [Design Patterns Used](#design-patterns-used)
     *   [Factory Method Pattern](#factory-method-pattern)
     *   [Strategy Pattern](#strategy-pattern)
-5.  [How to Run the Application](#how-to-run-the-application)
+6.  [How to Run the Application](#how-to-run-the-application)
 
+
+## Quick Links
 
 ## Initial Problem Statement
 
