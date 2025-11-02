@@ -23,7 +23,7 @@ The project also includes a high-level architectural proposal for scaling the sy
 ## Quick Links
 
 - Github Repo: https://github.com/AdnanMohamedKhairy/MSSE-Software-Design-Architecture-Project
-- Demo: 
+- Demo: https://www.veed.io/view/2ee3ecea-12f8-4f90-9578-f33bf47df76f?source=editor&panel=share
 
 ## Initial Problem Statement
 
