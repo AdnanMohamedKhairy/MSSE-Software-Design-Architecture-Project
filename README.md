@@ -22,6 +22,9 @@ The project also includes a high-level architectural proposal for scaling the sy
 
 ## Quick Links
 
+- Github Repo: https://github.com/AdnanMohamedKhairy/MSSE-Software-Design-Architecture-Project
+- Demo: 
+
 ## Initial Problem Statement
 
 The original codebase was a single-file Tkinter application with several common anti-patterns that hindered its maintainability, testability, and scalability:
