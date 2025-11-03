@@ -1,7 +1,6 @@
 ```mermaid
 graph TD
 subgraph Parking Flow
-    direction TD
     A[Start UI Gathers Input] --> B{Call ParkingLotpark};
     
     B --> C{Is Overall Lot Full};
@@ -30,7 +29,6 @@ subgraph Parking Flow
 end
 
 subgraph Removal Flow
-    direction TD
     S[Start UI Gathers Slot ID] --> T{Call ParkingLotleave};
     
     T --> U{Is Slot an EV Slot?};
