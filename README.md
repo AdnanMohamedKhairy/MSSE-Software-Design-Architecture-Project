@@ -24,6 +24,8 @@ The project also includes a high-level architectural proposal for scaling the sy
 
 - Github Repo: https://github.com/AdnanMohamedKhairy/MSSE-Software-Design-Architecture-Project
 - Demo: https://www.veed.io/view/c3f6df8f-fefe-4424-b4e1-20ba97c58eda?panel=share
+- UML for Original Code: https://github.com/AdnanMohamedKhairy/MSSE-Software-Design-Architecture-Project/tree/main/UMLforOriginalCode
+- UML: https://github.com/AdnanMohamedKhairy/MSSE-Software-Design-Architecture-Project/tree/main/UML
 
 ## Initial Problem Statement
 
